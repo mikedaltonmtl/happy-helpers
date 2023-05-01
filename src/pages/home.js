@@ -108,12 +108,18 @@ export default function Home({ tasks, user }) {
     }
 
     // Update state -> fire render of filtered tasks
-    setFilteredTasks(sortedFilteredTasks)
-  }
+    setFilteredTasks(sortedFilteredTasks);
+  };
 
-
-  const currentView = (view === "List" ? <section className='flex flex-col p-2 mx-2 overflow-hidden'>  <TaskList tasks={filteredTasks} userId={user.id} /> </section> : <section className='flex flex-col p-2 overflow-hidden'><Map tasks={filteredTasks} userId={user.id} /> </section>)
-
+  // Display view by list or map
+  const currentView = (view === "List" ?
+    <section className='flex flex-col p-2 mx-2 overflow-hidden'>
+      <TaskList tasks={filteredTasks} userId={user.id} />
+    </section> :
+    <section className='flex flex-col p-2 overflow-hidden'>
+      <Map tasks={filteredTasks} userId={user.id} />
+    </section>
+  );
 
   // Template
   return (
@@ -144,6 +150,7 @@ export default function Home({ tasks, user }) {
 }
 
 // Data fetching
+// eslint-disable-next-line func-style
 export async function getServerSideProps() {
 
   // Capture tasks with addresses:
@@ -157,7 +164,7 @@ export async function getServerSideProps() {
     orderBy: {
       startDate: 'desc'
     }
-  })
+  });
 
   // Define current user
   const userFetch = await prisma.user.findMany({
@@ -167,7 +174,7 @@ export async function getServerSideProps() {
     include: {
       address: true
     }
-  })
+  });
 
   const user = userFetch[0];
 
