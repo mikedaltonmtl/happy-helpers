@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
+
 import NavBar from '@/components/NavBar';
 import Footer from '@/components/Footer';
-import prisma from '../../prisma/.db';
+// import prisma from '../../prisma/.db';
+import { loggedInUser } from '../../mock-data/users';
+
 
 const ChatEngine = dynamic(() =>
   import('react-chat-engine').then(module => module.ChatEngine)
@@ -27,13 +30,10 @@ export default function Chat3({ user }) {
     return <div></div>;
   }
 
-
   return (
-
     <>
       <main className='flex flex-col '>
-        <NavBar name={user.firstName}
-          id={user.id} />
+        <NavBar name={user.firstName} id={user.id} />
         <div className='chat-height px-10 flex flex-col'>
           <ChatEngine
             height='calc(100vh - 200px)'
@@ -50,16 +50,9 @@ export default function Chat3({ user }) {
   );
 }
 
-export async function getServerSideProps() {
-  const user = await prisma.user.findUnique({
-    where: {
-      id: 1
-    }
-  })
+export const getServerSideProps = async function() {
 
   return {
-    props: {
-      user: JSON.parse(JSON.stringify(user))
-    }
+    props: { user: loggedInUser }
   };
-}
+};

@@ -1,9 +1,9 @@
-import Footer from '@/components/Footer'
-import NavBar from '@/components/NavBar'
-import TaskForm from '@/components/TaskForm'
-import { useState } from 'react'
-import prisma from '../../prisma/.db'
-
+import Footer from '@/components/Footer';
+import NavBar from '@/components/NavBar';
+import TaskForm from '@/components/TaskForm';
+import { useState } from 'react';
+// import prisma from '../../prisma/.db';
+import { loggedInUser } from '../../mock-data/users';
 
 export default function NewTask(props) {
   const [formData, setFormData] = useState({
@@ -27,24 +27,27 @@ export default function NewTask(props) {
       minute: "00",
       ampm: "PM"
     }
-  })
+  });
+
   return (
     <>
       <main className="full-height">
-        <NavBar name={props.user.firstName}
-          id={props.user.id} />
+        <NavBar name={props.user.firstName} id={props.user.id} />
         <div className="flex justify-center">
           <TaskForm formData={formData} setFormData={setFormData} user={props.user} />
         </div>
       </main>
-
       <Footer />
     </>
-  )
+  );
 }
+export const getServerSideProps = async function() {
 
-export async function getServerSideProps() {
+  return {
+    props: { user: loggedInUser }
+  };
 
+  /*
   const user = await prisma.user.findUnique({
     where: {
       id: 1
@@ -59,4 +62,5 @@ export async function getServerSideProps() {
       user: JSON.parse(JSON.stringify(user)),
     }
   }
-}
+  */
+};
