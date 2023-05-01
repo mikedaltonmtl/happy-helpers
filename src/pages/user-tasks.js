@@ -151,7 +151,7 @@ export default function UserTasks({ userRequests, offers, user }) {
   );
 }
 
-export const getServerSideProps = async function () {
+export const getServerSideProps = async function() {
 
   /** Capture tasks with addresses:
    *  SELECT tasks.*, addresses.* FROM tasks

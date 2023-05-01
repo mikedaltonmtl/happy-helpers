@@ -19,4 +19,4 @@ export default function getDistance (lat1, lon1, lat2, lon2) {
   dist = dist * 1.609344;
   
   return dist;
-};
+}
