@@ -7,7 +7,7 @@ import { loggedInUser } from '../../mock-data/users';
 import { sortedTasks } from '../../mock-data/tasks';
 
 // Helper functions
-import addDistanceToTasks from '../helpers/add-distance-to-tasks';
+// import addDistanceToTasks from '../helpers/add-distance-to-tasks';
 import sortTasksByDistance from '../helpers/sort-tasks-by-distance';
 import sortTasksByStartTime from '../helpers/sort-tasks-by-start-time';
 

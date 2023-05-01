@@ -1,8 +1,12 @@
 // @refresh reset
 import { useState, useEffect } from 'react';
-import prisma from '../../prisma/.db';
+// import prisma from '../../prisma/.db';
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { loggedInUser } from '../../mock-data/users';
+import { offers } from '../../mock-data/offers';
+import { userRequests } from '../../mock-data/requests';
+
 
 // Component dependencies
 import RequestList from '@/components/RequestList';
@@ -59,7 +63,7 @@ export default function UserTasks({ userRequests, offers, user }) {
    *    and set all losing offers status as denied
    * 3. In messages table: send accepted message to winner and denied messages to all losers
    */
-  const handleAcceptOffer = async function (offerId) {
+  const handleAcceptOffer = async function(offerId) {
     await axios.patch(`http://localhost:3000/api/offers/${offerId}`, { offerArray: selectedOffers });
     await axios.patch(`http://localhost:3000/api/tasks/${selectedRequestId}`, { newStatus: 'PENDING' });
 
@@ -83,7 +87,7 @@ export default function UserTasks({ userRequests, offers, user }) {
    * If the volunteer has received a star, add it to their user where user.id = offers.user_id
    *  and send the volunteer a notification
    */
-  const handleRequestComplete = async function (volunteerId, giveStar) {
+  const handleRequestComplete = async function(volunteerId, giveStar) {
     if (giveStar) {
       await axios.patch(`http://localhost:3000/api/tasks/${selectedRequestId}`, { newStatus: 'COMPLETE', starred: true });
       await axios.patch(`http://localhost:3000/api/users/${volunteerId}`, { field: 'stars' });
@@ -153,12 +157,17 @@ export default function UserTasks({ userRequests, offers, user }) {
 
 export const getServerSideProps = async function() {
 
+  return {
+    props: { userRequests, offers, user: loggedInUser }
+  };
+
   /** Capture tasks with addresses:
    *  SELECT tasks.*, addresses.* FROM tasks
    *  JOIN addresses ON tasks.address_id = addresses.id
    * WHERE tasks.user_id = 1
    * ORDER BY start_date desc;
    */
+  /*
   const userRequests = await prisma.task.findMany({
     where: {
       userId: 1
@@ -170,21 +179,25 @@ export const getServerSideProps = async function() {
       startDate: 'desc'
     }
   });
+  */
 
   /** Capture offers with volunteer's user info:
    * SELECT offers.*, users.* FROM offers
    * JOIN users ON offers.user_id = users.id;
    */
+  /*
   const offers = await prisma.offer.findMany({
     include: {
       user: true
     }
   });
+  */
 
   /** Capture the logged in user:
    * SELECT * FROM users
    * WHERE id = 1;
    */
+  /*
   const user = await prisma.user.findUnique({
     where: {
       id: 1
@@ -201,4 +214,5 @@ export const getServerSideProps = async function() {
       user: JSON.parse(JSON.stringify(user))
     }
   };
+  */
 };
