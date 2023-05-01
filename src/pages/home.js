@@ -1,6 +1,10 @@
 // Vendor methods
 import { useState } from 'react';
-import prisma from '../../prisma/.db';
+// import prisma from '../../prisma/.db';
+
+// Mock data
+import { loggedInUser } from '../../mock-data/users';
+import { sortedTasks } from '../../mock-data/tasks';
 
 // Helper functions
 import addDistanceToTasks from '../helpers/add-distance-to-tasks';
@@ -59,7 +63,7 @@ export default function Home({ tasks, user }) {
   const [category, setCategory] = useState(taskFilters.category);
 
   // Sort and Filter Tasks
-  const filterTasks = function (tasks, filters) {
+  const filterTasks = function(tasks, filters) {
     // Function globals
     const unfilteredTasks = [...tasks];
     let tasksInCategory;
@@ -98,13 +102,13 @@ export default function Home({ tasks, user }) {
     if (!filters.date) {
       filteredByDate = tasksInCategory;
     } else {
-      filteredByDate = tasksInCategory.filter(task => new Date(task.startDate).toISOString().substring(0, 10) === filters.date)
+      filteredByDate = tasksInCategory.filter(task => new Date(task.startDate).toISOString().substring(0, 10) === filters.date);
     }
     // Sort by distance or date
     if (filters.sort === 'Distance') {
-      sortedFilteredTasks = sortTasksByDistance(filteredByDate)
+      sortedFilteredTasks = sortTasksByDistance(filteredByDate);
     } else {
-      sortedFilteredTasks = sortTasksByStartTime(filteredByDate)
+      sortedFilteredTasks = sortTasksByStartTime(filteredByDate);
     }
 
     // Update state -> fire render of filtered tasks
@@ -149,10 +153,16 @@ export default function Home({ tasks, user }) {
   );
 }
 
-// Data fetching
-// eslint-disable-next-line func-style
-export async function getServerSideProps() {
+// Server-side data fetching
+export const getServerSideProps = async function() {
 
+  return {
+    props: {
+      tasks: sortedTasks,
+      user: loggedInUser
+    }
+  };
+  /*
   // Capture tasks with addresses:
   const tasks = await prisma.task.findMany({
     where: {
@@ -175,16 +185,17 @@ export async function getServerSideProps() {
       address: true
     }
   });
-
   const user = userFetch[0];
 
   // Add distance between user and task to tasks, order by ascending start time
   addDistanceToTasks(tasks, user);
   const sortedTasks = sortTasksByStartTime(tasks);
+
   return {
     props: {
       tasks: JSON.parse(JSON.stringify(sortedTasks)),
       user: JSON.parse(JSON.stringify(user))
     }
   };
-}
+  */
+};
