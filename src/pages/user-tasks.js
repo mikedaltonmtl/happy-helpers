@@ -99,9 +99,9 @@ export default function UserTasks({ userRequests, offers, user }) {
         cpName: `${user.firstName} ${user.lastName}`,
         taskName: userRequests.find(request => request.id === selectedRequestId).name
       };
-      // await axios.post(`http://localhost:3000/api/messages/`, { params });
+      await axios.post(`http://localhost:3000/api/messages/`, { params });
     } else {
-      // await axios.patch(`http://localhost:3000/api/tasks/${selectedRequestId}`, { newStatus: 'COMPLETE' });
+      await axios.patch(`http://localhost:3000/api/tasks/${selectedRequestId}`, { newStatus: 'COMPLETE' });
     }
     localStorage.setItem("selectedRequestId", selectedRequestId);
     router.refresh();
