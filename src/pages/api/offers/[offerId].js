@@ -1,21 +1,26 @@
-import prisma from "../../../../prisma/.db";
+// import prisma from "../../../../prisma/.db";
+import { offers } from '../../../../mock-data/offers';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { offerId } = req.query;
+    /*
     const offer = await prisma.offer.findUnique({
       where: {
         id: parseInt(offerId)
       }
     });
-    console.log(offer)
-    res.json({ offer })
+    */
+    const offer = offers.find(offer => offer.id === parseInt(offerId));
+    res.json({ offer });
+
   } else if (req.method === 'PATCH') {
     /**
      * Loop through all of the offers in the offer array
      * If the offerArray offer.id === { offerId } it is the chosen offer: set offer status to ACCEPTED
      * If the offerArray offer.id !== { offerId } the offer was rejected: set offer status to DENIED
      */
+    /*
     const winningOfferId = parseInt(req.query.offerId);
     const offerArray = req.body.offerArray;
     
@@ -30,7 +35,7 @@ export default async function handler(req, res) {
             status: 'ACCEPTED'
           }
         });
-
+        
       } else {
         await prisma.offer.update({
           where: {
@@ -42,6 +47,7 @@ export default async function handler(req, res) {
         });
       }
     }
+    */
     res.status(200).send('ok');
   }
 }

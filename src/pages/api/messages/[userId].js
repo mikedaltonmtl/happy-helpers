@@ -1,4 +1,6 @@
-import prisma from "../../../../prisma/.db";
+// import prisma from "../../../../prisma/.db";
+import { messages } from '../../../../mock-data/messages';
+
 
 export default async function handler(req, res) {
 
@@ -7,7 +9,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
 
     if (req.query.type === 'all') {
-
+      /*
       const messages = await prisma.message.findMany({
         where: {
           userId: userId,
@@ -17,11 +19,12 @@ export default async function handler(req, res) {
           receivedAt: 'desc'
         }
       });
+      */
       res.json({ messages });
     }
 
     if (req.query.type === 'countUnread') {
-
+      /*
       const messageCount = await prisma.message.count({
         where: {
           userId: userId,
@@ -29,13 +32,15 @@ export default async function handler(req, res) {
           markedRead: false
         }
       });
+      */
+      const messageCount = 3;
       res.json({ messageCount });
     }
   }
 
   // Mark all active messages as read when user opens messages
   if (req.method === 'PATCH') {
-
+    /*
     const countUpdated = await prisma.message.updateMany({
       where: {
         userId: userId
@@ -44,6 +49,8 @@ export default async function handler(req, res) {
         markedRead: true
       }
     });
+    */
+    const countUpdated = 3;
     res.json({ countUpdated });
   }
 
@@ -52,7 +59,7 @@ export default async function handler(req, res) {
    *  Note the userId being received is actually the message id of the message we want to update
    */
   if (req.method === 'DELETE') {
-
+    /*
     const disactivatedMessage = await prisma.message.update({
       where: {
         id: userId
@@ -62,5 +69,7 @@ export default async function handler(req, res) {
       }
     });
     res.json({ disactivatedMessage });
+    */
+    res.status(200).send('ok');
   }
 }

@@ -66,7 +66,7 @@ export default function UserTasks({ userRequests, offers, user }) {
   const handleAcceptOffer = async function(offerId) {
     await axios.patch(`http://localhost:3000/api/offers/${offerId}`, { offerArray: selectedOffers });
     await axios.patch(`http://localhost:3000/api/tasks/${selectedRequestId}`, { newStatus: 'PENDING' });
-
+    
     for (const offer of selectedOffers) {
       const params = {
         userId: offer.user.id,

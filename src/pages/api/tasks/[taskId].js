@@ -1,16 +1,22 @@
-import prisma from "../../../../prisma/.db";
+// import prisma from "../../../../prisma/.db";
+import { allTasks } from '../../../../mock-data/tasks';
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const { taskId } = req.query;
+
+    /*
     const task = await prisma.task.findUnique({
       where: {
         id: parseInt(taskId)
       }
-    })
-    res.json({ task })
-  } if (req.method === 'PATCH') {
+    });
+    */
+    const task = allTasks.find(task => task.id === parseInt(taskId));
+    res.json({ task });
 
+  } if (req.method === 'PATCH') {
+    /*
     const { taskId } = req.query;
     const { newStatus } = req.body;
     const { starred } = req.body;
@@ -24,7 +30,7 @@ export default async function handler(req, res) {
         starred: starred
       }
     });
-
+    */
     res.status(200).send('ok');
   }
 }

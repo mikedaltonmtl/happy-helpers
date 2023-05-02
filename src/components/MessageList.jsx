@@ -14,7 +14,7 @@ export default function MessageList({ userId, fetchUnreadMessageCount }) {
       const res = await axios.get(`http://localhost:3000/api/messages/${userId}`, {params: {type: 'all'}});
       setMessages(res.data.messages);
     } catch (err) {
-      console.log(err);
+      console.log('error in messagelist:', err);
     }
   };
 
