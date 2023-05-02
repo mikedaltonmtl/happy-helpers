@@ -1,3 +1,6 @@
+Please note that this is a static version of the [original Happy Helpers project](https://github.com/tronross/happy-helpers).
+No data will be modified and all map functions are disabled.
+
 <p align="center" width="100%">
     <img width="30%" src="https://raw.githubusercontent.com/tronross/happy-helpers/master/planning/logo.png">
 </p>
