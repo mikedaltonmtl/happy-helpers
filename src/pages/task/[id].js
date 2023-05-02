@@ -26,7 +26,7 @@ export default function TaskPage({ selectedTask, selectedUser, userTasks, offers
       cpName: `${loggedInUser.firstName} ${loggedInUser.lastName}`,
       taskName: userTasks.find(task => task.id === taskId).name
     };
-    await axios.post(`http://localhost:3000/api/messages/`, { params });
+    // await axios.post(`http://localhost:3000/api/messages/`, { params });
   };
 
   const setScroll = (id, rowType) => {

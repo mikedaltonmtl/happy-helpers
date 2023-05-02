@@ -29,12 +29,14 @@ export default function MessageList({ userId, fetchUnreadMessageCount }) {
   }, []);
 
   const handleDelete = async function(id) {
+    /*
     try {
       await axios.delete(`http://localhost:3000/api/messages/${id}`);
       fetchMessages();
     } catch (err) {
       console.log(err);
     }
+    */
   };
   
   const htmlMessages = messages.map((message, index) => {

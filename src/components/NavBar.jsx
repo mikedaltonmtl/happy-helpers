@@ -23,8 +23,10 @@ export default function NavBar(props) {
 
   const fetchUnreadMessageCount = async function() {
     try {
+      /*
       const res = await axios.get(`http://localhost:3000/api/messages/${props.id}`, { params: { type: 'countUnread' } });
-      // setUnreadMessageCount(res.data.messageCount);
+      setUnreadMessageCount(res.data.messageCount);
+      */
       setUnreadMessageCount(3);
 
     } catch (err) {
