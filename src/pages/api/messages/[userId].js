@@ -1,5 +1,5 @@
 // import prisma from "../../../../prisma/.db";
-import { messages } from '../../../../mock-data/messages';
+import { allMessages } from '../../../../mock-data/messages';
 
 
 export default async function handler(req, res) {
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         }
       });
       */
-      res.json({ messages });
+      res.json({ allMessages });
     }
 
     if (req.query.type === 'countUnread') {

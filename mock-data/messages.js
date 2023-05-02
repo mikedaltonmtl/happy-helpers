@@ -1,4 +1,4 @@
-const messages = [
+const allMessages = [
   {
     id: 1,
     userId: 1,
@@ -56,4 +56,4 @@ const messages = [
   }
 ];
 
-export { messages };
+export { allMessages };

@@ -1,6 +1,7 @@
 import Message from '../components/Message';
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import { allMessages } from '../../mock-data/messages';
 
 
 export default function MessageList({ userId, fetchUnreadMessageCount }) {
@@ -8,11 +9,15 @@ export default function MessageList({ userId, fetchUnreadMessageCount }) {
   const [messages, setMessages] = useState([]);
   const fetchMessages = async function() {
     try {
+      /*
       // Set all user's messages to markedRead = true
       await axios.patch(`http://localhost:3000/api/messages/${userId}`);
       // Fetch all active messages for user
       const res = await axios.get(`http://localhost:3000/api/messages/${userId}`, {params: {type: 'all'}});
       setMessages(res.data.messages);
+      */
+      setMessages(allMessages);
+
     } catch (err) {
       console.log('error in messagelist:', err);
     }
