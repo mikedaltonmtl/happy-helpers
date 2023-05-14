@@ -1,5 +1,8 @@
 Please note that this is a static version of the [original Happy Helpers project](https://github.com/tronross/happy-helpers).
 
+Here's [the link](https://happy-helpers-static.vercel.app/) to the static site.
+
+
 No data will be modified and all map functions are disabled.
 
 <p align="center" width="100%">
