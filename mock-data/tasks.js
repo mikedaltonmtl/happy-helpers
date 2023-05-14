@@ -994,7 +994,7 @@ const allTasks = [
     id: 19,
     name: 'Boat driver required',
     description: 'I love to waterski, but have no-one to drive the boat since my husband fell overboard last year.',
-    image: 'https://cdn-bmkic.nitrocdn.com/mfayRNjpwuryPngPrBbCMHYQdhKGQOLg/assets/images/optimized/rev-c2761dd/boating-resources/wp-content/uploads/2021/06/How-to-drive-a-boat-1120x580.png.webp',
+    image: 'https://cdn.pixabay.com/photo/2018/06/03/20/42/boat-3451511_1280.jpg',
     category: 'Driving',
     startDate: '2023-05-07T13:00:00.000Z',
     endDate: '2023-05-10T17:00:00.000Z',
